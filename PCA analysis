@@ -1,0 +1,20 @@
+#dataset variable is profiled expression matrix.
+
+install.packages("FactoMineR")
+install.packages("factoextra")
+library(FactoMineR)
+library(factoextra)
+pca_plot <- function(dd,gg)
+{
+  df.pca <- PCA(t(dd),graph = FALSE)
+  fviz_pca_ind(df.pca,
+               geom.ind = "point",
+               col.ind = gg,
+               addEllipses = TRUE,
+               legend.title="Groups",
+               palette = c("darkorchid", "red", "forestgreen")
+               )
+ }
+group <- factor(colnames(dataset))
+group <- relevel(group,"A")
+pca_plot(datasets,group)
